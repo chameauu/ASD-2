@@ -1,0 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "list.h"
+
+void creer_list(struct List* test)
+{
+    test=(struct List*)
+}
