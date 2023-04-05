@@ -22,11 +22,8 @@ void ajout_list(int info,struct List* test)
     if(vide(test))
     {
         
-        test->premier=new_element;   
         test->dernier=new_element;
 
-    }else
-    {
         test->dernier->suivant=new_element;
         test->dernier=new_element;
     }
@@ -48,14 +45,14 @@ void reverser(struct List* test)
 
 }
 
-void recursive_reverse(struct List* test,struct Noeud test_noeud )
-{
-    if(test->premier->suivant!=NULL)
-    {
-        recursive_reverse(test->premier->suivant);
-        printf("%d\t",test->premier->val);
-    }
-}
+// void recursive_reverse(struct List* test,struct Noeud test_noeud )
+// {
+//     if(test->premier->suivant!=NULL)
+//     {
+//         recursive_reverse(test->premier->suivant);
+//         printf("%d\t",test->premier->val);
+//     }
+// }
 
 
 void parcour(struct List* test,void (*fake)(struct Noeud*))

@@ -1,10 +1,17 @@
 struct element
 {
     int col;
-    int colonne;
+    int val;
     struct element* suivant;
 };
 
-void creation(struct element** ligne);
+struct list
+{
+    struct element* premier;
+    struct element* dernier;
+    
+};
 
-void remplir(int Mat,struct element** ligne);
+void creation(struct list* ligne);
+
+void remplir(int **Mat,struct list* ligne,int M,int N);

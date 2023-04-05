@@ -10,7 +10,7 @@ struct List
     struct Noeud* dernier;
 };
 
-void recursive_reverse(struct List* test );
+// void recursive_reverse(struct List* test );
 
 void creer_list(struct List*);
 unsigned vide(struct List* );
