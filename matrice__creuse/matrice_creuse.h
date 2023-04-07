@@ -15,3 +15,5 @@ struct list
 void creation(struct list* ligne);
 
 void remplir(int *Mat,struct list* ligne,int M,int N);
+
+int diff_size();
