@@ -30,13 +30,13 @@ void enfiler(struct File* test,int k)
     {
         
         test->tete=new_element;   
-        test->queue=new_element;
 
     }else
     {
         test->queue->suivant=new_element;
-        test->queue=new_element;
+        
     }
+    test->queue=new_element;
     
 }
 
