@@ -1,5 +1,4 @@
 #include <stdio.h>
-<<<<<<< HEAD
 #include "arbre_binaire.h"
 
 void main()
