@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "arbre_binaire.h"
 #include <assert.h>
-
+#include "file/file.h"
 
 struct noeud* creer_arbre()
 {
@@ -109,4 +109,30 @@ unsigned non_degenerer(struct noeud* test)
         return 1;
     else
         return non_degenerer(test->sad)+non_degenerer(test->sag);
+}
+
+void afficher_par_niveau(struct noeud* test)
+{
+    assert(!vide(test));
+    struct File* file;
+    struct noeud* p;
+    enfiler(file,test);
+    while(!vide_file(file))
+    {
+        p=defiler(file);
+        printf("%c ",p->info);
+        if(p->sad!=NULL)
+        {
+            enfiler(file,p->sad);
+            printf("%c ",p->sad->info);
+        }
+
+        if(p->sag!=NULL)
+        {
+            enfiler(file,p->sad);
+            printf("%c ",p->sag->info);
+        }
+    }
+    
+
 }

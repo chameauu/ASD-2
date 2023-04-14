@@ -11,6 +11,7 @@ void main()
     printf("%d\n",recherche(exp,(int)'d'));
     printf("%d\n",hauteur(exp));
     printf("%d\n",non_degenerer(exp));
+    afficher_par_niveau(exp);
 
 }
 // calcule de la taille d'un arbre binaire 
