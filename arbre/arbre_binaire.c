@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "arbre_binaire.h"
 #include <assert.h>
+#include "arbre_binaire.h"
 #include "file/file.h"
 
 struct noeud* creer_arbre()
@@ -115,22 +115,25 @@ void afficher_par_niveau(struct noeud* test)
 {
     assert(!vide(test));
     struct File* file;
+    creer_file(&file);
     struct noeud* p;
     enfiler(file,test);
+    printf("%c ",test->info);
     while(!vide_file(file))
     {
         p=defiler(file);
-        printf("%c ",p->info);
+        
+
+        if(p->sag!=NULL)
+        {
+            enfiler(file,p->sag);
+            printf("%c ",p->sag->info);
+        }
+
         if(p->sad!=NULL)
         {
             enfiler(file,p->sad);
             printf("%c ",p->sad->info);
-        }
-
-        if(p->sag!=NULL)
-        {
-            enfiler(file,p->sad);
-            printf("%c ",p->sag->info);
         }
     }
     

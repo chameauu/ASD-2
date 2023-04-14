@@ -44,7 +44,10 @@ struct noeud* defiler(struct File *test)
     assert(!vide_file(test));
     struct element* tmp=test->tete;
     struct noeud* x= tmp->valeur;
-    test->tete=test->tete->suivant;
+    if(test->tete==test->queue)
+        test->tete=test->queue=NULL;
+    else
+        test->tete=test->tete->suivant;
     free(tmp);
     return x;
 
