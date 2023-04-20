@@ -15,7 +15,10 @@ void main()
     afficher_par_niveau(exp);
     ajout_arbre_binaire(&exp,20);
     inOrder(exp);
-
+    printf("\n");
+    preOrder(exp);
+    printf("\n");
+    postOrder(exp);
 }
 // calcule de la taille d'un arbre binaire 
 // nombre de feuilles 

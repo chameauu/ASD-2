@@ -161,7 +161,27 @@ void inOrder(struct noeud* test)
     if(test!=NULL)
     {
         inOrder(test->sag);
-        printf("%d",test->info);
+        printf("%d ",test->info);
         inOrder(test->sad);
+    }
+}
+
+void preOrder(struct noeud*test)
+{
+    if(test!=NULL)
+    {
+        printf("%d ",test->info);
+        preOrder(test->sag);
+        preOrder(test->sad);
+    }
+}
+
+void postOrder(struct noeud* test)
+{
+    if(test!=NULL)
+    {
+        postOrder(test->sag);
+        postOrder(test->sad);
+        printf("%d ",test->info);
     }
 }
