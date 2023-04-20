@@ -139,3 +139,29 @@ void afficher_par_niveau(struct noeud* test)
     
 
 }
+
+void ajout_arbre_binaire(struct noeud** test,int x)
+{
+
+    if(*test==NULL)
+    {
+        struct noeud*p=(struct noeud*)malloc(sizeof(struct noeud));
+        p->sad=p->sag=NULL;
+        p->info=x;
+        *test=p;        
+    }
+    if(x<(*test)->info)
+        return ajout_arbre_binaire(&((*test)->sag),x);
+    else if(x>(*test)->info)
+        return ajout_arbre_binaire(&((*test)->sad),x);
+}
+
+void inOrder(struct noeud* test)
+{
+    if(test!=NULL)
+    {
+        inOrder(test->sag);
+        printf("%d",test->info);
+        inOrder(test->sad);
+    }
+}

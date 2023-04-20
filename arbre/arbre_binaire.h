@@ -20,3 +20,5 @@ int hauteur(struct noeud*);
 void afficher_par_niveau(struct noeud*);
 unsigned non_degenerer(struct noeud *);
 void afficher_par_niveau(struct noeud*);
+void ajout_arbre_binaire(struct noeud** test,int x);
+void inOrder(struct noeud*);
