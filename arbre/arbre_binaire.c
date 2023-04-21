@@ -118,7 +118,7 @@ void afficher_par_niveau(struct noeud* test)
     creer_file(&file);
     struct noeud* p;
     enfiler(file,test);
-    printf("%c ",test->info);
+    printf("%d ",test->info);
     while(!vide_file(file))
     {
         p=defiler(file);
@@ -127,17 +127,31 @@ void afficher_par_niveau(struct noeud* test)
         if(p->sag!=NULL)
         {
             enfiler(file,p->sag);
-            printf("%c ",p->sag->info);
+            printf("%d ",p->sag->info);
         }
 
         if(p->sad!=NULL)
         {
             enfiler(file,p->sad);
-            printf("%c ",p->sad->info);
+            printf("%d ",p->sad->info);
         }
     }
     
 
+}
+
+struct noeud* rechercheBinaire(struct noeud* test,int x)
+{
+    if(test==NULL)
+        return NULL;
+    if(test->info!=x)
+    {
+        if(x<test->info)
+            rechercheBinaire(test->sag,x);
+        else if(x>test->info)
+            rechercheBinaire(test->sad,x);
+    }else
+        return test;
 }
 
 void ajout_arbre_binaire(struct noeud** test,int x)
@@ -185,3 +199,130 @@ void postOrder(struct noeud* test)
         printf("%d ",test->info);
     }
 }
+
+struct noeud* rechercheBinaireMoinsUn(struct noeud*test,int x)
+{
+    if(test==NULL)
+        return NULL;
+    if(x>test->info)
+    {
+        if(x==test->sad->info)
+        {
+            return test;
+        }else
+        {
+            rechercheBinaireMoinsUn(test->sad,x);
+        }
+    }else if(x<test->info)
+    {
+        if(x==test->sag->info)
+        {
+            return test;
+        }
+        else{
+            rechercheBinaireMoinsUn(test->sag,x);
+        }
+    }
+
+}
+
+struct noeud* inPre(struct noeud* test)
+{
+    while(test && test->sad)
+    {
+        test=test->sad;
+    }
+    return test;
+}
+
+struct noeud* inSucc(struct noeud* test)
+{
+    while(test && test->sag)
+    {
+        test=test->sag;
+    }
+    return test;
+}
+
+
+struct noeud* supprimer(struct noeud *test,int x)
+{
+    struct noeud* q;
+    if(test==NULL) return NULL;
+    if(test->sag==NULL && test->sad==NULL)
+    {
+        free(test);
+        return NULL;
+    }
+    if(x< test->info)
+        test->sag=supprimer(test->sag,x);
+    else if(x>test->info)
+        test->sad=supprimer(test->sad,x);
+    else
+    {
+        if(hauteur(test->sag)>hauteur(test->sad))
+        {
+            q=inPre(test->sag);
+            test->info=q->info;
+            test->sag=supprimer(q->sag,q->info);
+        }else
+        {
+            q=inSucc(test->sad);
+            test->info=q->info;
+            test->sad=supprimer(q->sad,q->info);
+            
+        }
+    }
+    return test;
+}
+
+
+
+
+
+// void supprimer(struct noeud **test,int x)
+// {
+//     struct noeud* elementToDelete;
+//     if((*test)->info==x)
+//         elementToDelete=*test;
+//     else
+//         elementToDelete=rechercheBinaireMoinsUn(*test,x);
+    
+//     if(elementToDelete!=NULL)
+//     {
+//         struct noeud* p=elementToDelete;
+//         if(elementToDelete->sag && elementToDelete->sad)
+//         {
+//             p=elementToDelete->sag;
+//             while(p->sad)
+//             {
+//                 p=p->sad;
+
+//             }
+//             p->sad=elementToDelete->sad;
+//             elementToDelete->sad=elementToDelete->sag->sad;
+//             elementToDelete->info=elementToDelete->sag->info;
+//             elementToDelete->sag=p->sag;
+
+//         }
+//         else if (elementToDelete->sad)
+//         {
+//             p=elementToDelete->sad;
+//             elementToDelete->sad=p->sad;
+//             elementToDelete->sag=p->sag;
+//             elementToDelete->info=p->info;
+//         }
+//         else if(elementToDelete->sag)
+//         {
+//             p=elementToDelete->sag;
+//             elementToDelete->sad=p->sad;
+//             elementToDelete->sag=p->sag;
+//             elementToDelete->info=p->info;
+//         }
+        
+//         free(p);
+        
+//     }
+// }
+
+
