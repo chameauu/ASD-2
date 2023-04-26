@@ -6,7 +6,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/arbre/main",
+            "program": "${workspaceFolder}/list/main",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${fileDirname}",
