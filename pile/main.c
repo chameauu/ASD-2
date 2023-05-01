@@ -4,7 +4,7 @@
 
 void main()
 {
-    struct Pile* test=(struct Pile*)malloc(sizeof(struct Pile));
+    struct Pile* test;
     cree_pile(test);
    printf("%d\n",vide(test));
    empiler(test,5);
