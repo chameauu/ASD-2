@@ -39,6 +39,6 @@ void main()
     // printf("\nafficher recherche moins un %d\n",rechercheBinaireMoinsUn(exp,20)->info);
 }
 // calcule de la taille d'un arbre binaire 
-// nombre de feuilles 
+// nombre de feuilles
 // rechercher element 
 // verifier arbre n'est pas generer
