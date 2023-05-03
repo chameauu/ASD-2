@@ -6,7 +6,7 @@
 
 void cree_pile(struct Pile* pile)
 {
-    printf("hello\n");
+    pile=(struct Pile*)malloc(sizeof(struct Pile));
     pile->sommet=NULL;
     pile->nbelement=0;
 }
