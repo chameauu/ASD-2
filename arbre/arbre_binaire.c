@@ -118,6 +118,38 @@ void afficher_par_niveau(struct noeud* test)
     creer_file(&file);
     struct noeud* p;
     enfiler(file,test);
+    
+    while(!vide_file(file))
+    {
+        test=file->tete->valeur;
+        printf("%d ",test->info);
+        
+
+
+        if(test->sag!=NULL)
+        {
+            enfiler(file,test->sag);
+            
+        }
+
+        if(test->sad!=NULL)
+        {
+            enfiler(file,test->sad);
+            
+        }
+        defiler(file);
+    }
+
+
+}
+
+void afficher_par_niveau2(struct noeud* test)
+{
+    assert(!vide(test));
+    struct File* file;
+    creer_file(&file);
+    struct noeud* p;
+    enfiler(file,test);
     printf("%d ",test->info);
     while(!vide_file(file))
     {
@@ -139,6 +171,8 @@ void afficher_par_niveau(struct noeud* test)
 
 
 }
+
+
 
 struct noeud* rechercheBinaire(struct noeud* test,int x)
 {

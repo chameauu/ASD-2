@@ -27,3 +27,5 @@ void preOrder(struct noeud*);
 void postOrder(struct noeud*);
 struct noeud* supprimer(struct noeud*,int );
 struct noeud* rechercheBinaireMoinsUn(struct noeud*test,int x);
+
+void afficher_par_niveau2(struct noeud* test);
