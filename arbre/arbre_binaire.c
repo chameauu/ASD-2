@@ -279,26 +279,29 @@ struct noeud* rechercheBinaireMoinsUn(struct noeud*test,int x)
 
 }
 
-struct noeud* inPre(struct noeud* test)
+struct noeud* MinBST(struct noeud* test)
 {
-    while(test && test->sad && test->sad)
-    {
-        test=test->sad;
-    }
+   if (test == NULL)
+    return NULL;
+  else if (test->sag == NULL)
     return test;
+  else
+    return MinBST(test->sag);
 }
 
-struct noeud* inSucc(struct noeud* test)
+struct noeud* MaxBST(struct noeud* test)
 {
-    while(test && test->sag && test->sag->sag)
-    {
-        test=test->sag;
-    }
+    if (test == NULL)
+    return NULL;
+  else if (test->sad == NULL)
     return test;
+  else
+    return MaxBST(test->sad);
 }
 
 
-struct noeud* supprimer(struct noeud*test,int x)
+
+/* struct noeud* supprimer(struct noeud*test,int x)
 
 {
     if(test==NULL) return NULL;
@@ -329,86 +332,123 @@ struct noeud* supprimer(struct noeud*test,int x)
     return test;
 
 }
+ */
+/* struct noeud* supprimer(struct noeud *test,int x)
+{
+    struct noeud* q;
+    if(test==NULL) return NULL;
+    if(test->sag==NULL && test->sad==NULL)
+    {
+        free(test);
+        return NULL;
+    }
+    if(x< test->info)
+        test->sag=supprimer(test->sag,x);
+    else if(x>test->info)
+        test->sad=supprimer(test->sad,x);
+    else
+    {
+        if(hauteur(test->sag)>hauteur(test->sad))
+        {
+            q=inPre(test->sag);
+            test->info=q->info;
+            test->sag->sad=supprimer(q,q->info);
+        }else
+        {
+            q=inSucc(test->sad);
+            test->info=q->info;
+            tsupprimer(q,q->info);
 
-// struct noeud* supprimer(struct noeud *test,int x)
-// {
-//     struct noeud* q;
-//     if(test==NULL) return NULL;
-//     if(test->sag==NULL && test->sad==NULL)
-//     {
-//         free(test);
-//         return NULL;
-//     }
-//     if(x< test->info)
-//         test->sag=supprimer(test->sag,x);
-//     else if(x>test->info)
-//         test->sad=supprimer(test->sad,x);
-//     else
-//     {
-//         if(hauteur(test->sag)>hauteur(test->sad))
-//         {
-//             q=inPre(test->sag);
-//             test->info=q->info;
-//             test->sag->sad=supprimer(q,q->info);
-//         }else
-//         {
-//             q=inSucc(test->sad);
-//             test->info=q->info;
-//             tsupprimer(q,q->info);
+        }
+    }
+    return test;
 
-//         }
-//     }
-//     return test;
+} */
 
-// }
+/* void supprimer(struct noeud **test,int x)
+{
+    struct noeud* elementToDelete;
+    if((*test)->info==x)
+        elementToDelete=*test;
+    else
+        elementToDelete=rechercheBinaireMoinsUn(*test,x);
 
+    if(elementToDelete!=NULL)
+    {
+        struct noeud* p=elementToDelete;
+        if(elementToDelete->sag && elementToDelete->sad)
+        {
+            p=elementToDelete->sag;
+            while(p->sad)
+            {
+                p=p->sad;
 
+            }
+            p->sad=elementToDelete->sad;
+            elementToDelete->sad=elementToDelete->sag->sad;
+            elementToDelete->info=elementToDelete->sag->info;
+            elementToDelete->sag=p->sag;
 
+        }
+        else if (elementToDelete->sad)
+        {
+            p=elementToDelete->sad;
+            elementToDelete->sad=p->sad;
+            elementToDelete->sag=p->sag;
+            elementToDelete->info=p->info;
+        }
+        else if(elementToDelete->sag)
+        {
+            p=elementToDelete->sag;
+            elementToDelete->sad=p->sad;
+            elementToDelete->sag=p->sag;
+            elementToDelete->info=p->info;
+        }
 
+        free(p);
 
-// void supprimer(struct noeud **test,int x)
-// {
-//     struct noeud* elementToDelete;
-//     if((*test)->info==x)
-//         elementToDelete=*test;
-//     else
-//         elementToDelete=rechercheBinaireMoinsUn(*test,x);
+    }
+} */
 
-//     if(elementToDelete!=NULL)
-//     {
-//         struct noeud* p=elementToDelete;
-//         if(elementToDelete->sag && elementToDelete->sad)
-//         {
-//             p=elementToDelete->sag;
-//             while(p->sad)
-//             {
-//                 p=p->sad;
+struct noeud* supprimer(struct noeud* test, int x)
+{
+    struct noeud* tmpCell;
+    assert(test!=NULL);
+        
+    if(x<test->info)
+    {
+        test->sag=supprimer(test->sag,x);
+    }
+    else if(x>test->info)
+    {
+        test->sad=supprimer(test->sad,x);
+    }
+    else // l9ina element 
+    {
+        if(test->sad && test->sag) // two children
+        {
+            tmpCell=MinBST(test->sad);
+            test->info=tmpCell->info;
+            test->sad=supprimer(test->sad,test->info);
+        }
+        else // one or zero children
+        {
+            tmpCell=test;
+            if(test->sad == NULL)
+            {
+                test=test->sag;
+            }
+            else if(test->sag==NULL)
+            {
+                test=test->sad;
+            }
+            free(tmpCell);
+        }
 
-//             }
-//             p->sad=elementToDelete->sad;
-//             elementToDelete->sad=elementToDelete->sag->sad;
-//             elementToDelete->info=elementToDelete->sag->info;
-//             elementToDelete->sag=p->sag;
+        }
+        return test;
+            
 
-//         }
-//         else if (elementToDelete->sad)
-//         {
-//             p=elementToDelete->sad;
-//             elementToDelete->sad=p->sad;
-//             elementToDelete->sag=p->sag;
-//             elementToDelete->info=p->info;
-//         }
-//         else if(elementToDelete->sag)
-//         {
-//             p=elementToDelete->sag;
-//             elementToDelete->sad=p->sad;
-//             elementToDelete->sag=p->sag;
-//             elementToDelete->info=p->info;
-//         }
-
-//         free(p);
-
-//     }
-// }
+    }
 
 
